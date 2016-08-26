@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Pizza Order Form</h1>
+<form id="pizzaorder" method="post" action="#">
+	<p>Name:<br><input id="id1" type="text" name="name" required></p>
+
+	<p>Address:####Street Name...<br><input id="id2" type="text" name="address" pattern='(\d\d\d\d).{3,}' title="Must contain four street numbers and your street name" required></p>
+
+	<p>Phone Number:123-123-1234<br><input id="id3" type="tel" name="phone" pattern='\d\d\d\d\d\d\d\d\d\d' title="Must be seven digits" required></p>
+
+	<p>Pizza Size:</p>
+	<input id="id4" type="radio" name="size" value="Large" required> Large
+  	<input id="id4" type="radio" name="size" value="Medium" required> Medium
+  	<input id="id4" type="radio" name="size" value="Small" required> Small
+
+	<p>Pizza Toppings:</p>
+	<input type="checkbox" name="toppings" value="Sausage">Sausage
+	<input type="checkbox" name="toppings" value="Pepperroni">Pepperroni
+	<input type="checkbox" name="toppings" value="Olives">Olives
+	<input type="checkbox" name="toppings" value="Anchovies">Anchovies
+	<input type="checkbox" name="toppings" value="Onions">Onions<br>
+
+	<br />
+	
+	<input type="submit" value="Place Order" onclick="doSomething()">
+	<input type="reset" value="Clear">
+
+	<script>
+	function doSomething(){
+
+ 	var inpObj = document.getElementById("id1");
+        if (inpObj.checkValidity() == false) {
+        window.alert('Fill out your name!');
+	return;
+	}
+
+	var inpObj1 = document.getElementById("id2");
+        if (inpObj1.checkValidity() == false) {
+        window.alert('Fill out your address!');
+	return;
+	}
+
+	var inpObj2 = document.getElementById("id3");
+        if (inpObj2.checkValidity() == false) {
+        window.alert('Fill out your phone number!');
+	return;
+	}
+
+	var inpObj3 = document.getElementById("id4");
+        if (inpObj3.checkValidity() == false) {
+        window.alert('Choose a size!');
+	return;
+	}
+    
+	window.alert('Your order have been received');
+	}</script>
+
+</html>
