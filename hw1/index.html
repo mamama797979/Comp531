@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Log in page</title>
+	<meta charset="UTF-8">
+	<meta name="author" content="Xintong Ma">
+
+</head>
+<body>
+<h1>Create your account</h1>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHdjlUvuNjNgwduNX6WrNQMiqyuk0mXgV4HuM5vmpfwtWua8dPww" style="position: absolute; top: 100px; left: 400px;">
+<img src="http://www.rice.edu/_images/kinder-image.jpg" style="position: absolute; top: 100px; left: 800px;">
+<p style="position: absolute; top: 400px; left: 400px;"><font size="6">Register with us, make more friends!</font></p>
+<form id="Login" action="file:///C:/Users/dell/Desktop/inclass-1/formprocessor.html" method="GET" action="#">
+	<p>Account name:<br><input id="id1" type="text" name="accountname" required></p>
+
+	<p>Display name:<br><input id="id2" type="text" name="displayname"></p>
+
+	<p>E-mail address:<br><input id="id3" type="email" name="email"  required></p>
+
+	<p>Phone Number:123-123-1234<br><input id="id4" type="tel" name="phone" pattern='\d\d\d\d\d\d\d\d\d\d' title="Must be seven digits" required></p>
+
+	<p>Date of birth:<br><input id="id5" type="date" name="date" required></p>
+
+	<p>Zipcode:xxxxx<br><input id="id6" type="tel" name="zip" pattern='\d\d\d\d\d' title="Must be five digits" required></p>
+
+	<p>Password:<br><input id="id7" type="password" name="password" required></p>
+
+	<p>Password conformation:<br><input id="id8" type="password" name="passwordconfirmation" required></p>
+	
+	<input id="id9" type="hidden" name="time" value="timestamp">
+
+	
+
+	<br />
+	
+	<input type="submit" value="Submit" onclick="doSomething()">
+	<input type="reset" value="Clear">
+</form>
+
+	<script>
+	function doSomething(){
+
+	var inpObj = document.getElementById("id1");
+        if (inpObj.checkValidity() == false) {
+        window.alert("Fill out your account name!");
+		return;
+		}
+
+	if(alphanumeric()==true){
+			return;
+		}
+
+	if(validateEmail()==true){
+		return;
+		}
+
+	var inpObj3 = document.getElementById("id4");
+        if (inpObj3.checkValidity() == false) {
+        window.alert("Fill out your phone number! Must be seven digits");
+		return;
+		}
+	
+	var inpObj4 = document.getElementById("id5");
+        if (inpObj4.checkValidity() == false) {
+        window.alert("Fill out your birthday!");
+		return;
+		}
+	
+	if(Age()==true){
+	return;
+		}
+
+	var inpObj5 = document.getElementById("id6");
+        if (inpObj5.checkValidity() == false) {
+        window.alert("Fill out Zipcode! Must be five digits");
+		return;
+		}
+
+	var inpObj6 = document.getElementById("id7");
+        if (inpObj6.checkValidity() == false) {
+        window.alert("Fill out password!");
+		return;
+		}
+
+	var inpObj7 = document.getElementById("id8");
+        if (inpObj7.checkValidity() == false) {
+        window.alert("Retype your password! Password must match");
+		return;
+		}	
+    
+    if(Validatepassword()==true){
+    	return;
+    	}
+
+  	settime();
+
+    window.alert("You have been registered")
+
+	}
+
+	function alphanumeric() {  
+ 	var letterNumber = /^[a-zA-Z][0-9a-zA-Z]+$/;
+ 	var Accountnumber = document.getElementById("id1").value; 
+ 	var isvalid=letterNumber.test(Accountnumber);
+ 	if(isvalid==false){
+ 		window.alert("Account name can only be upper or lower case letters and numbers, but may not start with a number")
+ 		return true;
+ 	}
+  	}  
+
+	function validateEmail() {
+    	var x = document.forms["Login"]["email"].value;
+    	var atpos = x.indexOf("@");
+    	var dotpos = x.lastIndexOf(".");
+    	if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+        window.alert("Not a valid e-mail address!");
+        return true;
+        }
+        }
+	
+	function Age() {
+    	var today = new Date();
+    	var thisYear = 0;
+    	var birthday = new Date(document.forms["Login"]["date"].value);
+    	if (today.getMonth() < birthday.getMonth()) {
+        thisYear = 1;
+    	} else if ((today.getMonth() == birthday.getMonth()) && today.getDate() < birthday.getDate()) {
+        thisYear = 1;
+    	}
+    	var age = today.getFullYear() - birthday.getFullYear() - thisYear;
+    	if (age<18){
+		window.alert("You must be 18 or older to register!");
+		return true;
+		}
+		}
+
+	function Validatepassword() {
+        var password = document.getElementById("id7").value;
+        var confirmPassword = document.getElementById("id8").value;
+        if (password != confirmPassword) {
+            window.alert("Passwords do not match.");
+            return true;
+        }
+    	}
+    function settime(){
+    	document.getElementById("id9").value=Date.now();
+		}
+	
+</script>
+</body>
+
+</html>
