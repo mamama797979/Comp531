@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Xintong Ma</h1>
+
+<p>Hello, I am Xintong. I just come from beijing, beijing is my favorite city, I love the city's morden and ancient side. Chinese people welcome people from all over the world to come to Beijing and enjoy your journey. You can open this link to learn more about beijing:<a href="https://www.travelchinaguide.com/cityguides/beijing.htm">Beijing Guide</a></p>
+
+<hr/>
+<img src="https://staff.rice.edu/images/staff/branding/logo.jpg" width="200px" title="Rice Logo">
+<hr/>
+<p>Please leave your comment:<p/>
+<textarea id='txt' rows="3" cols="20">	
+</textarea>
+<input type="button" value="Clear" onclick="doSomething()">
+<input type="text" id="indicator" size="35" />
+<button onclick="int=window.clearInterval(int)">
+Stop interval</button>
+
+<script>
+	
+	function doSomething(){
+ 	document.getElementById('txt').value="";	
+	}
+
+	show();
+
+	function show(){
+	setTimeout(function(){ alert("The page will redirect when the counter reaches zero"); }, 7000);
+	}
+
+
+	var t=15000;
+	var int=self.setInterval("clock()",1000)
+	function clock(){
+  	document.getElementById("indicator").value=t/1000;
+  	t=(t-1000);
+  	if (t<0) {
+  		window.clearInterval(int);
+  		window.location.href = "inclass3.html"
+  		return;
+  	}
+  	}
+
+</script>
+
+</body>
+</html>
