@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Game</title>
+	<meta charset="UTF-8">
+	<meta name="author" content="Xintong Ma">
+	<style>
+	p{
+		text-align: center;
+	}
+	#div{
+		background-color: green;
+		border: 1px solid red;
+		border-radius: 25px;
+		width:20%;
+		position: relative;
+  		top: 400px;
+  		left: 500px;
+	}
+	</style>
+</head>
+
+<body>
+
+<input type="button" id="button" value="Click Me" onmouseenter="moveRight();" >
+
+<div>
+<input id="key" onkeydown="verify();" type="text"><p>Press shift in the text field to win</p>
+</div>
+
+<div id="div">
+<p>Congratulations!</p>
+<p>You won!</p>
+</div>
+</body>
+
+<script src="avoid.js" type="text/javascript">
+</script>
+
+</html>
