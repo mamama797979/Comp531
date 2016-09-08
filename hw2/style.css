@@ -1,0 +1,79 @@
+#table{
+	border: 1px solid black;
+	width: 100%;
+}
+
+td{
+	border: 1px solid black;
+	width:50%;
+	text-align: center;
+}
+
+#id1{
+	width:70%;
+	height:317px;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+#id2{
+	color: navy;
+    background-color: grey;
+}
+
+#id3{
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: blue;
+
+}
+
+#id4{
+	width:100%;
+    height:317px;
+    outline: 5px dotted red;
+}
+
+#id5{
+    width:100%;
+    height:350px;
+}
+
+#id6{
+	width:100%;
+    height:350px;"
+}
+#text1{
+	font-size: 25px;
+	text-shadow: 2px 2px #FF0000;
+}
+
+#text2{
+	border: 1px solid black;
+    outline-style: double;
+    outline-color: blue;
+    font-style: italic;
+}
+
+#link{
+	color: hotpink;
+}
+
+#button1{
+	color: red;
+} 
+
+#button2{
+	color: blue;
+} 
+
+#button3{
+	color: yellow;
+} 
+
+#button4{
+	color: green;
+}
+
+div{
+	text-align:center;
+} 
