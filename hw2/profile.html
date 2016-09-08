@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Profile page</title>
+	<meta charset="UTF-8">
+	<meta name="author" content="Xintong Ma">
+	<style>
+		p{
+    		display: inline;
+    		color:blue;
+		}
+		#button{
+			color: red;
+		} 
+		#link{
+			color: hotpink;
+		}
+		div{
+			font-size: 35px;
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+
+<!-- Define the input field and text field -->
+<div>
+<p>Display name:<input id="id1" type="text" name="displayname"></p>
+<p id="id2">Texas</p>
+</div><br><br>
+
+<div>
+<p>E-mail address:<input id="id3" type="email" name="email"></p>
+<p id="id4">Cs@rice.edu</p><br>
+</div><br><br>
+
+<div>
+<p>Phone Number:<input id="id5" type="tel" name="phone" pattern='\d\d\d\d\d\d\d\d\d\d' title="Must be ten digits"></p>
+<p id="id6">1234567890</p><br>
+</div><br><br>
+
+<div>
+<p>Zipcode:<input id="id7" type="tel" name="zip" pattern='\d\d\d\d\d' title="Must be five digits"></p>
+<p id="id8">12345</p><br>
+</div><br><br>
+
+<div>
+<p>Password:<input id="id9" type="password" name="password"></p>
+<p id="id10">abcdef</p><br>
+</div><br><br>
+
+<div>
+<p>Password conformation:<input id="id11" type="password" name="passwordconfirmation"></p>
+<p id="id12">abcdef</p><br>
+</div><br><br>
+
+<div>
+<button id="button" type="button" onclick="update();">Update</button><br><br>
+</div><br><br>
+
+<!-- Link to main page -->
+<div>
+<a id="link" href="Main.html">Link to main page</a>
+</div>
+
+</body>
+
+<script src="profile.js" type="text/javascript">
+</script>
+
+</html>>
