@@ -111,10 +111,10 @@ function updateSubmit(){
             newValue = item.children[1].children[0].value;
             item.children[1].children[0].value = '';
             propertyTable[item.id].setValue(newValue);
-            item.children[2].innerHTML = (item.id==='password'?'Password have been changed!':newValue);
+            item.children[2].innerHTML = (item.id==='password'?'Password Changed!':newValue);
             propertyField = item.children[0].innerHTML;
         }
         changedProperties.forEach(updateProperties);
-        noticeAlert(true,'Update success!');
+        noticeAlert(true,'Update succeed!');
     }   
 }
