@@ -1,0 +1,19 @@
+{
+  "name": "starter",
+  "version": "1.0.0",
+  "description": "COMP 531 HW03 Front End",
+  "main": "./src/index.html",
+  "scripts": {
+    "deploy": "surge -p dist",
+    "start": "cd dist && (python -m http.server 8082 || python -m http.server 8082)"
+  },
+  "author": "Xintong Ma",
+  "license": "MIT",
+  "devDependencies": {
+    "surge": "^0.18.0"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.6.1"
+  }
+}
