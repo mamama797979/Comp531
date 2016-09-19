@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="author" content="Xintong Ma">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" 
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+        <script src="index.js" ></script>
+        <title> Welcome to Hall of Fame !</title>
+    </head>
+    
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1><strong>Hall of Fame!</strong></h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-box">
+                        <div class="form-top">
+                            <div class="form-top-left">
+                                <h3>Sign up</h3>
+                            </div>
+                        </div>
+                        <div class="form-bottom">
+                            <form role="form" action="main.html" method="GET" id="Registrstion">
+                                <div class="form-group">
+                                    <p class="sr-only">Account Name</p>
+                                    <input type="text" placeholder="Account name" class="form-control" id="AccountName" 
+                                    pattern="[A-Za-z]+[A-Za-z0-9]*" title="Account name can only be upper or lower case letters and numbers, but may not start with a number" required>
+                                </div>
+                                <div class="form-group">
+                                    <p class="sr-only">Display Name</p>
+                                    <input type="text" name="displayName" placeholder="Display name(optional)" class="form-control" id="Displayname">
+                                </div>
+                                <div class="form-group">
+                                    <p class="sr-only">Email</p>
+                                    <input type="email" placeholder="Email" class="form-control" id="Email" pattern="[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+" 
+                                    title="Email should have @ and ." required>
+                                </div>
+                                <div class="form-group">
+                                    <p class="sr-only">Phone</p>
+                                    <input type="text" placeholder="Phone" class="form-control" id="Phone" pattern="\d{3}-\d{3}-\d{4}"
+                                    title="Phone number should be format of 123-123-1234" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only">Date of Birth</label>
+                                    <input type="text" id="bday" onfocus="(this.type='date')"
+                                    placeholder="Date of birth..." class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only">Zipcode</label>
+                                    <input type="text" id="zipcode" name="zipcode"  pattern="\d{5}"
+                                    title="US zipcode should be exactly 5 digits." placeholder="Zipcode..."
+                                    class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only">Password</label>
+                                    <input type="password" id="pwd" placeholder="Password..." name="pwd" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only">Password Confirmation</label>
+                                    <input type="password" id="pwdCfm" placeholder="Password Confirmation..." name="pwdCfm" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn">Register!</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-box">
+                        <div class="form-top">
+                            <div class="form-top-left">
+                                <h3>Login</h3>
+                                <p>Enter username and password to login:</p>
+                            </div>
+                        </div>
+                        <div class="form-bottom">
+                            <form role="form" method="GET" action="main.html"  id="loginForm">
+                                <div class="form-group">
+                                    <label class="sr-only">Username</label>
+                                    <input type="text" placeholder="Username" class="form-control" id="Username">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only">Password</label>
+                                    <input type="password" placeholder="Password" class="form-control" id="Password">
+                                </div>
+                                <button type="submit" class="btn" id="Loginbutton">Login!</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </body>
+</html>

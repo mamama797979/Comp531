@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="author" content="Xintong Ma">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Get the newest version of bootstrap css from maxcdn -->
+        <link rel="stylesheet" 
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="style.css">
+        <script src="main.js" ></script>
+        <title> Welcome to Hall of Fame !</title>
+    </head>
+    
+    <body>
+        <div class="row" >
+            <div class="col-md-3">
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <div class="card">
+                            <img src="http://www.gameguyz.com/sites/default/files/pictures_images/14.05.2013/1368519818_9.jpg" >
+                            <div class="cardContainer">
+                                <h4><b>Kobe</b></h4> 
+                                <p>Thanks my fans!</p>
+                                <input type="text" name="status" placeholder="Status" class="form-control" id="status"><br>
+                                <button class="btn">Update</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="card">
+                            <img src="http://ballislife.com/wp-content/uploads/2013/06/bil-td.jpg" >
+                            <div class="cardContainer">
+                                <h4><b>Duncan</b></h4> 
+                                <p>Future is yours, James</p>
+                                <button class="btn">Delete</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="card">
+                            <img src="http://www.gameguyz.com/sites/default/files/pictures_images/14.05.2013/1368519818_11.jpg" >
+                            <div class="cardContainer">
+                                <h4><b>Durrant</b></h4> 
+                                <p>Ok, Curry</p>
+                                <button class="btn">Delete</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="card">
+                            <img src="https://s-media-cache-ak0.pinimg.com/736x/8e/0b/7d/8e0b7dc62576d5b739251d9586194a87.jpg" >
+                            <div class="cardContainer">
+                                <h4><b>Curry</b></h4> 
+                                <p>Come to me, Durrant</p>
+                                <button class="btn">Delete</button>
+                            </div>
+                        </div>
+                    </li><br><br>
+                    <li>
+                        <input type="text" name="newUser" placeholder="Add New User" class="form-control" id="Newuser">
+                        <button class="btn">Add</button>
+                    </li><br><br>
+                    <li>
+                        <button class="btn" id="Logoutbutton">Log Out</button>
+                        <button class="btn" id="Profilebutton">Profile</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-9">
+                <h1><strong>Welcome to Hall of Fame!</strong></h1>
+                <div class="btn-group-vertical">
+                    <input type="file" id="file" class="btn btn-primary" />
+                    <label for="file" class="btn btn-primary">Add Image</label>
+                    <button type="button" class="btn btn-primary">Cancel</button>
+                    <button type="button" class="btn btn-primary">Post</button>
+                </div>
+                    
+                <div class="col-xs-7">
+                    <textarea class="form-control" rows="6" placeholder="What is on your mind?" id="userPost"></textarea>
+                </div><br><br><br><br>
+
+                <div class="col-xs-7">
+                    <textarea class="form-control" rows="1" placeholder="Search" id="Searchbox"></textarea>
+                </div><br><br><br><br>
+            </div> 
+            <div class="col-md-8">
+                <div class="w3-card">
+                    <img src="http://scontent.cdninstagram.com/t51.2885-15/s480x480/e35/13534044_1648675915453894_1482941386_n.jpg?ig_cache_key=MTI4MjQ3OTY2MTg2MzM4NTg5MA%3D%3D.2">
+                    <p>My story began in our capital. Born in DC, raised in Maryland, now hooping around the world.</p>
+                    <p>Author:Durrant</p>
+                    <p>Post time:07/22/2016</p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-primary">Comment</button>
+                    </div>
+                </div><br>
+                <div class="w3-card">
+                    <img src="http://scontent.cdninstagram.com/t51.2885-15/s480x480/e35/13129419_871369496306534_2034104559_n.jpg?ig_cache_key=MTI0NDE1MTM2MzExMzI4NzYzOA%3D%3D.2">
+                    <p>Durrant, wait for me!</p>
+                    <p>Author:Lillard</p>
+                    <p>Post time:07/22/2016</p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-primary">Comment</button>
+                    </div>
+                </div><br>
+                <div class="w3-card">
+                    <img src="http://scontent.cdninstagram.com/t51.2885-15/s480x480/e35/13092368_463037387225974_410799535_n.jpg?ig_cache_key=MTI0MTAwMzY3MzAyNjI2NDc0Mg%3D%3D.2">
+                    <p>Learning how to make some Dim Sum and Spring Rolls in Guangzhou, China</p>
+                    <p>Author:Curry</p>
+                    <p>Post time:09/03/2016</p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-primary">Comment</button>
+                    </div>
+                </div><br>
+                <div class="w3-card">
+                    <p>It was MY honor to play here for 20 years. Much respect, LA. </p>
+                    <p>Author:Kobe</p>
+                    <p>Post time:08/24/2016</p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-primary">Comment</button>
+                    </div>
+                </div><br>
+                <div class="w3-card">
+                    <p>We focus on what we have to do. We have experience dealing with it. We were the villains (in the Finals) so we will be more prepared. But all that matters is what goes on in our locker room.</p>
+                    <div class="text-center">
+                    <p>Author:Curry</p>
+                    <p>Post time:07/07/2016</p>
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-primary">Comment</button>
+                    </div>
+                </div><br>
+                <div class="w3-card">
+                    <img src="http://scontent.cdninstagram.com/t51.2885-15/s480x480/e35/13092267_109753899431057_981855335_n.jpg?ig_cache_key=MTIzNzU0ODE4OTE2NjMwNDU5MQ%3D%3D.2" class="card-image">
+                    <p>In October we will have pre-season games in China and I hope you will also come to watch. I am thankful for you to read my news on the internet every day.</p>
+                    <p>Author:Lin</p>
+                    <p>Post time:07/27/2016</p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-primary">Comment</button>
+                    </div>
+                </div><br>
+                <div class="w3-card">
+                    <p>I just love to play, I just kept trying to figure out different ways to play through things and you know it was basic logic to me if there was any reason the injury wouldn't get worse, I'm going to play through it. </p>
+                    <p>Author:Kobe</p>
+                    <p>Post time:04/12/2016</p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-primary">Comment</button>
+                    </div>
+                </div><br>
+                <div class="w3-card">
+                    <p>I've been doing a little vacation, a lot of family time. During the season I am wrapped into the whole basketball thing and how to prepare to win every night and things of that nature. The family takes a hit because you don't get to spend as much time with them as you would like.</p>
+                    <p>Author:James</p>
+                    <p>Post time:08/19/2016</p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary">Edit</button>
+                        <button type="button" class="btn btn-primary">Comment</button>
+                    </div>
+                </div>
+            </div>
+        </div>           
+    </body>
+</html>
