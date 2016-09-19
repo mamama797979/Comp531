@@ -1,4 +1,4 @@
-//Initialize the property fields when the page is loaded.
+//Initialize when the page is loaded.
 window.onload = function(){
     var mainBtn = document.getElementById("mainPageBtn")
     var properties = document.getElementsByClassName('property');
@@ -12,12 +12,12 @@ window.onload = function(){
     }
 }
 
-//A constructor to manage the property updation.
+//Constructor to manage the property updation.
 function Property(name, value){
     var PropertyName = name;
     var PropertyValue = value;
     
-    //Valid the input value for each property field.
+    //Valid the input value。
     this.validateNewInputValue = function(newValue){
         if(newValue === PropertyValue){
             noticeAlert(false,'New value is the same as the old value! ('+PropertyName+')');
@@ -65,7 +65,7 @@ function Property(name, value){
     }
 }
 
-//Show alert in page.
+//Show alert.
 function noticeAlert(flag,info){
     var noticeDiv = document.getElementById("page-notice");
     if(flag){
@@ -79,7 +79,7 @@ function noticeAlert(flag,info){
     noticeDiv.innerHTML =  info;
 }
 
-//Global variable to mange all the properties.
+//Variable to mange all the properties.
 var propertyTable = {};
 
 //Click handler for update button.
@@ -104,18 +104,17 @@ function updateSubmit(){
         }
     }
     Array.from(properties).forEach(findValidChangedProperties);
-    //Only update when all changed properties are valid.
+    //Update when all changed properties are valid.
     if(validFlag && changedProperties.length!==0){
-        
         function updateProperties(item){
             oldValue = propertyTable[item.id].getValue();
             newValue = item.children[1].children[0].value;
             item.children[1].children[0].value = '';
             propertyTable[item.id].setValue(newValue);
-            item.children[2].innerHTML = (item.id==='password'?'Password Changed!':newValue);
+            item.children[2].innerHTML = (item.id==='password'?'Password have been changed!':newValue);
             propertyField = item.children[0].innerHTML;
         }
         changedProperties.forEach(updateProperties);
-        noticeAlert(true,'Update succeed!');
+        noticeAlert(true,'Update success!');
     }   
 }
