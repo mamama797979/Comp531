@@ -20,6 +20,7 @@ const resource = (method, endpoint, payload) => {
         throw new Error(r.statusText)
       }
     })
+  
 }
 
 const login = () => {
@@ -61,12 +62,11 @@ const toggle = (show) => {
 }
 
 const updateHeadline = (headline) => {
-  resource('PUT', 'headline', { headline }).then((response) => {
+  const box = document.querySelector("#message")
+  return resource('PUT', 'headline', { headline }).then((response) => {
     console.log(`New headline ${response.headline}`)
-    // IMPLEMENT ME
-    // Update the headline shown on the screen.  Be sure to not
-    // repeat yourself (DRY) => you will want to refactor some code.
-  })
+    box.innerHTML=`Headline was updated to ${response.headline}`
+  }).catch(e => box.innerHTML = `"${e.message || 'Error'}" when updating headline` )
 }
 
 export { url, login, logout, updateHeadline }
