@@ -4,7 +4,6 @@ function random(nn)
     return(Math.floor(Math.random()*nn)%nn);
 }
 
-
 function WordFit(ss_long, ss_short, nn)
 { 
     var ss, ssub, cc, bb, ss0, ss1, dds;
