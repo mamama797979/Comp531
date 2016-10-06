@@ -1,7 +1,10 @@
+/*Generate random word*/
 function random(nn)
 { 
     return(Math.floor(Math.random()*nn)%nn);
 }
+
+
 function WordFit(ss_long, ss_short, nn)
 { 
     var ss, ssub, cc, bb, ss0, ss1, dds;
@@ -30,6 +33,7 @@ function WordFit(ss_long, ss_short, nn)
     return(-1);
 }
 
+/*Fill column*/
 function FillCol(nn)
 { 
     var ii, ii0=random(Size), ll=nWord[nn], jj, jj0=random(ll), ss;
@@ -61,6 +65,7 @@ function FillCol(nn)
     return(0);
 }
 
+/*Fill row*/
 function FillRow(nn)
 { 
     var ii, ii0=random(Size), ll=nWord[nn], jj, jj0=random(ll), ss;
@@ -90,7 +95,10 @@ function FillRow(nn)
     return(0);
 }
 
+/*Chance to plat the game*/
 var count=3;
+
+/*Initial function*/
 function Init()
 { 
     document.getElementById("id2").innerHTML=count;
@@ -121,6 +129,7 @@ function Init()
     setTimeout("Fill("+eval((Size+3)/2)+")",400);
 }
 
+/*Load word*/
 function Fill(nn)
 { 
     var cc, rr;
@@ -181,6 +190,7 @@ function Vis(cc,vv)
     return"_";
 }
 
+/*Score mechanism*/
 var t;
 var Start=new Date();
 var StartTime = Start.getTime() / 1000;
@@ -192,6 +202,7 @@ window.onload = function startTime() {
     t = setTimeout(startTime, 500);
 }
 
+/*Show word image*/
 function Show(vv)
 { 
     var rr, cc, oo=0, dd=(SizeMax-Size)/2;
@@ -224,6 +235,7 @@ function Show(vv)
     StartTime = Now.getTime() / 1000;
 }
 
+/*Set size*/
 function SetSize(ss)
 { 
     if (IsLoading) 
@@ -232,6 +244,7 @@ function SetSize(ss)
     Init();
 }
 
+/*Execute when click mouse*/
 function Clicked(ii, jj)
 { 
     var dd=(SizeMax-Size)/2;
@@ -282,6 +295,7 @@ function Clicked(ii, jj)
     }  
 }
 
+/*Fit into row*/
 function FitIntoRow(ww, rr, cc)
 { 
     var ii, ccmin=cc; ccmax=cc;
@@ -298,6 +312,7 @@ function FitIntoRow(ww, rr, cc)
     return(ccmin);
 }
 
+/*Fit into column*/
 function FitIntoCol(ww, rr, cc)
 { 
     var ii, rrmin=rr; rrmax=rr;
@@ -314,6 +329,7 @@ function FitIntoCol(ww, rr, cc)
     return(rrmin);
 }
 
+/*Create and initial data*/
 var i, j, g, IsLoading=false, SizeMax=13, Size=7, StartTime, EndTime, IsOver, IsRepeat;
 var WL=WordList.split(" ");
 var nWord=new Array(19)

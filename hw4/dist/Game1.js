@@ -1,3 +1,4 @@
+/*Code to onload words on the screen*/
 document.open("text/plain");
 document.writeln("<table><tr><td>");
 for (n=0; n < SizeMax; n++){ 
@@ -7,10 +8,7 @@ for (n=0; n < SizeMax; n++){
     document.writeln("</NOBR><BR>");
 }
 document.writeln("</td></tr></table></td><td>");
-if ((navigator.appName=="Netscape")&&(navigator.appVersion.charAt(0)=="4"))
-    document.writeln("<select size=23 width=120 name='Words'>");
-else
-    document.writeln("<select size=18 style='width:120px; font-family:Courier New; font-weight:bold; font-size:18px' width=120 name='Words'>");
+document.writeln("<select size=18 style='width:120px; font-family:Courier New; font-weight:bold; font-size:18px' width=120 name='Words'>");
 document.writeln("<option name='0' id='0'>Please");
 document.writeln("<option name='1' id='1'>wait");
 document.writeln("<option name='2' id='2'>while");
