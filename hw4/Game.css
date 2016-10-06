@@ -1,0 +1,21 @@
+body {
+    background-color: #ccffff;
+}
+
+div {
+    text-align: center;
+    font-family: serif;
+}
+
+td {
+    text-align: center;
+    background-color:#ddddcc;
+}
+
+table {
+    width:100%;
+}
+
+button{
+    width:40;
+}
