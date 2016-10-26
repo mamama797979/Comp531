@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { register } from './authActions'
 
+//The register form JSX
 class Register extends Component {
 
     componentDidUpdate() {
