@@ -4,6 +4,7 @@ import { fetchFollowers } from '../main/followingActions'
 import { fetchArticles } from '../article/articleActions'
 import { fetchProfile, validateProfile } from '../profile/profileActions'
 
+//Operations to log in and log out.
 export function initialVisit() {
     return (dispatch) => {
         resource('GET', 'headlines').then((response) => {
