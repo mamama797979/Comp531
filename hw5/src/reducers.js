@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import Action from './actions'
 
+//Combine reducer of different sections of the page for redux
 function followers(state = { followers: {} }, action) {
     switch(action.type) {
         case Action.FOLLOWER_UPDATE:
