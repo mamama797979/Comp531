@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { addFollower, delFollower, dispatch } from './followingActions'
 
+//React component for follower side bar
 const Follower = ({name, avatar, headline, dispatch}) => (
     <div className="follower_card" name="follower">
         <img src={ avatar }/>
