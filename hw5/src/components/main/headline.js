@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { updateHeadline } from '../profile/profileActions'
 
+//User's headline react component
 class Headline extends Component {
 
     render() { return (
