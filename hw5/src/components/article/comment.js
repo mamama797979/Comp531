@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import ContentEditable from './contentEditable'
 import { editArticle } from './articleActions'
 
+//Comment JSX
 class Comment extends Component {
 
     constructor(props) {
