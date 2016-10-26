@@ -1,2 +1,4 @@
-# starter
-COMP431/531 Starter
+{
+	netid: xm10
+	url: http://fortunate-scarecrow.surge.sh/
+}
