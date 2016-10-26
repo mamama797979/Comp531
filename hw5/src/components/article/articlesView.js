@@ -5,6 +5,7 @@ import Article from './article'
 import NewArticle from './newArticle'
 import { searchKeyword } from './articleActions'
 
+//Overall article views, include the new article part, the search bar and all articles
 const ArticlesView = ({username, articles, dispatch}) => {  
   let keyword = ''
   return (
