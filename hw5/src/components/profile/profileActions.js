@@ -1,5 +1,6 @@
 import Action, { updateError, resource } from '../../actions'
 
+//Operations to syn server and page for the profile data.
 export function validateProfile({username, email, phone, zipcode, password, pwconf}) {
     if (username) {
         if (!username.match('^[a-zA-Z][a-zA-Z0-9]+')) {
