@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { uploadImage } from './profileActions'
 
+//Avatar JSX
 class Avatar extends Component {
 
     componentDidUpdate(oldprops) {
