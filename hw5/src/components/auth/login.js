@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { localLogin } from './authActions'
 
+//The login section react component
 const Login = ({dispatch}) => {
     let username, password
     return (
