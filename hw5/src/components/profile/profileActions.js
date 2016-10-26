@@ -1,70 +1,110 @@
-import Action, {resource} from '../../actions'
+import Action, { updateError, resource } from '../../actions'
 
-//Operations to syn server and page for the profile data.
+export function validateProfile({username, email, phone, zipcode, password, pwconf}) {
+    if (username) {
+        if (!username.match('^[a-zA-Z][a-zA-Z0-9]+')) {
+            return 'Invalid username.  Must start with a letter and can only contains letters and numbers.'
+        }
+    }
 
-function getProfileAvatars(){
+    if (email) {
+        if (!email.match('^[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z][a-zA-Z]+$')) {
+            return 'Invalid email.  Email must be in format of a@b.c'
+        }
+    }
+
+    if (phone) {
+        if (!phone.match('^\[0-9]{3}[-]?\[0-9]{3}[-]?\[0-9]{4}$')) {
+            return 'Invalid phone.  Phonr number must be in format of 123-123-1234'
+        }
+    }
+
+    if (zipcode) {
+        if (!zipcode.match('^[0-9]{5}$')) {
+            return 'Invalid zipcode.  Must be 5 digits in length,'
+        }
+    }
+
+    if (password || pwconf) {
+        if (password !== pwconf) {
+            return 'Password do not match'
+        }
+    }
+
+    return ''
+}
+
+export function updateHeadline(headline) {
     return (dispatch) => {
-        return resource('GET','avatars')
-        .then((response)=>{
-            dispatch({type:Action.UPDATE_PROFILE, avatar: response.avatars[0].avatar});
-        })
+        dispatch(updateField('headline', headline))
     }
 }
 
-function getProfileEmail(){
+export function updateProfile({email, phone, zipcode, password, pwconf}) {
     return (dispatch) => {
-        return resource('GET','email')
-        .then((response)=>{
-            dispatch({type:Action.UPDATE_PROFILE, email: response.email});
-        })
+        const err = validateProfile({email, phone, zipcode, password, pwconf})
+        if (err.length > 0) {
+            return dispatch(updateError(err))
+        }
+        dispatch(updateField('email', email))
+        dispatch(updateField('zipcode', zipcode))
+        dispatch(updateField('password', password))
     }
 }
 
-function getProfileZipcode(){
+export function fetchProfile() {
     return (dispatch) => {
-        return resource('GET','zipcode')
-        .then((response)=>{
-            dispatch({type:Action.UPDATE_PROFILE, zipcode: response.zipcode});
-        })
+        dispatch(fetchField('avatars'))
+        dispatch(fetchField('zipcode'))
+        dispatch(fetchField('email'))
     }
 }
 
-function getProfileDob(){
+function updateField(field, value) {
     return (dispatch) => {
-        return resource('GET','dob')
-        .then((response)=>{
-            dispatch({type:Action.UPDATE_PROFILE, dob: new Date(response.dob).toDateString()});
-        })
-    }
-}
-
-export function getProfileHeadline(user){
-    return (dispatch) => {
-        resource('GET',`headlines/${user}`)
-        .then((response)=>{
-            dispatch({type:Action.UPDATE_PROFILE, headline: response.headlines[0].headline});
-        })
-    }
-}
-
-export function putProfileHeadline(value){
-    return (dispatch) => {
-        if(value) {
-            resource('PUT','headline', {'headline':value})
-            .then((response)=>{
-                dispatch({type:Action.UPDATE_PROFILE, headline: response.headline});
+        if (value) {
+            const payload = {}
+            payload[field] = value
+            resource('PUT', field, payload).then((response) => {
+                const action = { type: Action.UPDATE_PROFILE }                
+                action[field] = response[field]
+                if (field == 'password')
+                    dispatch(updateError('will not change password'))
+                else
+                    dispatch(action)
             })
         }
     }
 }
 
-export function getProfile(){
+function fetchField(field) {
     return (dispatch) => {
-        return Promise.all([
-            getProfileAvatars()(dispatch),
-            getProfileEmail()(dispatch),
-            getProfileZipcode()(dispatch),
-            getProfileDob()(dispatch)
-        ])
+        resource('GET', field).then((response) => {
+            const action = { type: Action.UPDATE_PROFILE }
+            switch(field) {
+                case 'avatars':
+                    action.avatar = response.avatars[0].avatar; break;
+                case 'email':
+                    action.email = response.email; break;
+                case 'zipcode':
+                    action.zipcode = response.zipcode; break;
+            }
+            dispatch(action)
+        })
     }
 }
+
+export function uploadImage(file) {
+    return (dispatch) => {
+        if (file) {
+            const fd = new FormData()
+            fd.append('image', file)
+            resource('PUT', 'avatar', fd, false)
+            .then((response) => {
+                dispatch({ type: Action.UPDATE_PROFILE, avatar: response.avatar })
+            })
+        }
+    }
+}
+
+

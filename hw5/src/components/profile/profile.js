@@ -1,22 +1,51 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import {nav2Main} from '../../actions'
-import {nav2Index} from '../../actions'
-import Message from '../message'
 import ProfileForm from './profileForm'
+import Avatar from './avatar'
 
-//Profile page structure
-const Profile = ({dispatch}) => (
-    <div>
-        <p><a className="btn btn-primary" href="#" onClick={ () => {dispatch(nav2Main())}} role="button">Main Page</a></p>
-        <p><a className="btn btn-primary" href="#" onClick={ () => {dispatch(nav2Index())}} role="button">Log Out</a></p>
-        <div className="jumbotron text-center">
-            <h1>Profile:</h1>
+const Messages_ = ({error, success}) => (
+     <div>
+        <div>
+            { error.length == 0 ? '' :
+                <div className="alert_error">
+                    <div id="errorMessage">{error}</div>
+                </div>
+            }
+            { success.length == 0 ? '' :
+                <div className="alert_success">
+                    <div id="successMessage">{success}</div>
+                </div>
+            }
         </div>
-        <Message/>
-        <ProfileForm/>
     </div>
 )
 
-export default connect()(Profile)
+Messages_.propTypes = {
+    error: PropTypes.string.isRequired,
+    success: PropTypes.string.isRequired
+}
+
+const Messages = connect(
+    (state) => {
+        return {
+            error: state.common.error,
+            success: state.common.success,
+        }
+    }
+)(Messages_)
+
+const Profile = () => {
+    return (
+        <div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <h1><b>Profile Page</b></h1>
+            <Avatar/>
+            <Messages/>
+            <ProfileForm/>
+        </div>
+    )
+}
+export default Profile
+

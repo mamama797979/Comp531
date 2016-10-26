@@ -1,74 +1,81 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import Action, {displayErrorMsg} from '../../actions'
-import Avatar from './avatar'
+import { updateProfile } from './profileActions'
 
-//Profile form structure
-export class ProfileForm extends Component {
-    constructor(props){
-        super(props);
+class ProfileForm extends Component {
+
+    componentDidUpdate() {
+        if (this.props.error.length == 0) {
+            this.email.value = null
+            this.phone.value = null
+            this.zipcode.value = null
+            this.password.value = null
+            this.pwconf.value = null
+        }
     }
 
     render() { return (
-        <form className="centerForm" onSubmit={(e) => {
+        <form onSubmit={(e) => {
             if (e) e.preventDefault()
-            this.props.dispatch(displayErrorMsg("Update information is not required for HW5"))
+            const payload = {
+                email:this.email.value == this.oldEmail ? '' : this.email.value,
+                zipcode:this.zipcode.value == this.oldZipcode ? '' : this.zipcode.value,
+                password:this.password.value,
+                pwconf:this.pwconf.value
+            }
+            this.props.dispatch(updateProfile(payload))
         }}>
-            <Avatar/>
-            <div className="row formRow property" id="displayName">
-                <div className="col-md-4">Account:</div>
-                <div className="col-md-4"><input type="text" size="20"/></div>
-                <div className="col-md-4">{this.props.username}</div>
+            
+            <table className="index_table1">
+            <tbody>
+                <tr>
+                    <td>Email Address</td>
+                    <td><input id="email" type="text" placeholder={this.props.oldEmail}
+                        ref={(node) => this.email = node }/></td>
+                </tr>
+                <tr>
+                    <td>Zipcode</td>
+                    <td><input id="zipcode" type="text" placeholder={this.props.oldZipcode}
+                        ref={(node) => this.zipcode = node }/></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input id="password" type="password" placeholder="Password"
+                        ref={(node) => this.password = node }/></td>
+                </tr>
+                <tr>
+                    <td>Password Confirmation</td>
+                    <td><input id="pwconf" type="password" placeholder="Password Confirmation"
+                        ref={(node) => this.pwconf = node }/></td>
+                </tr>
+            </tbody>
+            </table>
+            <br />
+            <div className="btnprofile">
+                <button className="button" type="submit">Update</button> 
             </div>
-            <div className="row formRow property" id="emailAddress">
-                <div className="col-md-4">Email:</div>
-                <div className="col-md-4"><input type="text" size="20"/></div>
-                <div className="col-md-4">{this.props.email}</div>
-            </div>
-            <div className="row formRow property" id="zipcode">
-                <div className="col-md-4">Zipcode:</div>
-                <div className="col-md-4"><input type="text" size="20"/></div>
-                <div className="col-md-4">{this.props.zipcode}</div>
-            </div>
-            <div className="row formRow property" id="password">
-                <div className="col-md-4">Password:</div>
-                <div className="col-md-4"><input type="password" size="20"/></div>
-                <div className="col-md-4"></div>
-            </div>
-            <div className="row formRow">
-                <div className="col-md-4">Password Confirmation:</div>
-                <div className="col-md-4"><input type="password" size="20" id="passwordConfirm"/></div>
-                <div className="col-md-4"></div>
-            </div>
-            <div className="row formRow">
-                <div className="col-md-4">Date of Birth:</div>
-                <div className="col-md-4">{this.props.dob}</div>
-                <div className="col-md-4"></div>
-            </div>
-            <div className="row formRow text-center">
-                <input type="submit" className="btn btn-primary" value="Update"/>
-            </div>
+
         </form>
     )}
 }
 
-
-ProfileForm.PropTypes = {
-    username:PropTypes.string.isRequired,
-    avatar:PropTypes.string.isRequired,
-    zipcode:PropTypes.number.isRequired,
-    email:PropTypes.string.isRequired,
-    dispatch:PropTypes.func.isRequired,
-    dob:PropTypes.string.isRequired
+ProfileForm.propTypes = {
+    error: PropTypes.string.isRequired,
+    oldZipcode: PropTypes.number.isRequired,
+    oldEmail: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired
 }
 
-export default connect((state) => {
-    return {
-        username: state.profile.username,
-        avatar: state.profile.avatar,
-        zipcode: state.profile.zipcode,
-        email: state.profile.email,
-        dob: state.profile.dob
+export default connect(
+    (state) => {
+        return {
+            error: state.common.error,
+            oldZipcode: state.profile.zipcode,
+            oldEmail: state.profile.email,
+        }
     }
-})(ProfileForm)
+)(ProfileForm)
+
+export { ProfileForm as PureProfileForm }
+
