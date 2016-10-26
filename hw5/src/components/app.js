@@ -8,7 +8,7 @@ import Profile from './profile/profile'
 
 const App = ({location}) => {
 
-    // 
+    //Single application page
     let view
     switch(location) {
         case 'main': view = <Main/>; 
