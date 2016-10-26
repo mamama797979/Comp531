@@ -4,6 +4,7 @@ import fetch from 'isomorphic-fetch'
 const isLocal = false
 export const apiUrl = isLocal ? 'http://localhost:3000' : 'https://webdev-dummy.herokuapp.com'
 
+//All simple dispatch action type and functions
 const Action = {
 
      ADD_ARTICLE: 'ADD_ARTICLE'
