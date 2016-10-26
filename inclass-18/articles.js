@@ -22,7 +22,7 @@ var articleSet = [
 const addArticle = (req, res) => {
      console.log('Payload received', req.body)    
      var newId = articleSet.length+1
-     var newAuthor = "Chenlai"
+     var newAuthor = "xm10"
      var newText = req.body.body;
      var article = {
      	id: newId,
