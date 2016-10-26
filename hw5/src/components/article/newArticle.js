@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { uploadArticle } from './articleActions'
 
+//New artcile section component
 class NewArticle extends Component {
 
     handleImageChange(e) {
