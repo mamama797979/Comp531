@@ -1,77 +1,76 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { RegisterAction} from './registerActions'
 
+import { register } from './authActions'
 
-const Register = ({dispatch}) => {
-    let accountName, displayName, email, dateOfBirth, zipcode, password, confirmPassword;
+class Register extends Component {
 
-    // Register form
-    return(
-    <div className="col-sm-6 well">
-        <div className = "text-center">
-            <h2>Register</h2>
-        </div>
-        <form  onSubmit= {(e) => {
-            e.preventDefault();
-            dispatch(RegisterAction());
-        }}>
-        <div className="form-group row">
-            <label htmlFor="example-text-input" className="col-xs-4 col-form-label">Account Name</label>
-            <div className="col-xs-8">
-                <input className="form-control" type="text" name="account name" ref={(node) => { accountName = node }} required/>
-            </div>
-        </div>
-        <div className="form-group row">
-            <label htmlFor="example-text-input" className="col-xs-4 col-form-label">Display name (optional)</label>
-            <div className="col-xs-8">
-                <input className="form-control" type="text" name="display name" ref={(node) => { displayName = node }}/>
-            </div>
-        </div>
-        <div className="form-group row">
-            <label htmlFor="example-text-input" className="col-xs-4 col-form-label">Email</label>
-            <div className="col-xs-8">
-                <input className="form-control" type="email" placeholder="eg. a@b.co" name="email address" ref={(node) => { email = node }} required/>
-            </div>
-        </div>
-        <div className="form-group row">
-            <label htmlFor="example-text-input" className="col-xs-4 col-form-label">Date of birth</label>
-            <div className="col-xs-8">
-                <input className="form-control" type="text" name="date of birth" placeholder="mm-dd-year" pattern="^\d{1,2}-\d{1,2}-\d{4}$" ref={(node) => { dateOfBirth = node }} required/>
-            </div>
-        </div>
-        <div className="form-group row">
-            <label htmlFor="example-text-input" className="col-xs-4 col-form-label">Zipcode</label>
-            <div className="col-xs-8">
-                <input className="form-control" type="text" name="zipcode" placeholder="77005" pattern="^\d{5}(?:[-\s]\d{4})?$" ref={(node) => { zipcode = node }}required/>
-            </div>
-        </div>
-        <div className="form-group row">
-            <label  className="col-xs-4 col-form-label">Password</label>
-            <div className="col-xs-8">
-                <input className="form-control" type="password" name="password" placeholder="Password" id="password" ref={(node) => { password = node }} required/>
-            </div>
-        </div>
-            <div className="form-group row">
-            <label htmlFor="example-text-input" className="col-xs-4 col-form-label">Password confirmation</label>
-            <div className="col-xs-8">
-                <input className="form-control" type="password" name="password confirmation" placeholder="Confirm Password" ref={(node) => { confirmPassword = node }} required/>
-            </div>
-        </div>
-        <input type="hidden" name="timestamp" id="timestamp"/>
-        <div className = "col-xs-8 col-md-offset-4">
-            <input type="submit" className="btn btn-primary" value="Submit"/>
-            <input type="button" className="btn btn-primary" value="Clear" onClick={()=>{
-                accountName.value=''
-                displayName.value=''
-                email.value=''
-                dateOfBirth.value=''
-                password.value=''
-                confirmPassword=''
-            }}/>
-        </div>
-        </form>
-        </div>
-        )}
+    componentDidUpdate() {
+        if (this.props.error.length == 0) {
+            this.email.value = null
+            this.phone.value = null
+            this.birth.value = null
+            this.zipcode.value = null
+            this.password.value = null
+            this.pwconf.value = null
+        }
+    }
 
-    export default connect()(Register)
+    render() { return (
+        <div className="register_title">
+            <form onSubmit={(e) => {
+                e.preventDefault()
+                const payload = {
+                    username:this.username.value,
+                    email:this.email.value,
+                    phone:this.phone.value,
+                    birth:this.birth.value,
+                    zipcode:this.zipcode.value,
+                    password:this.password.value,
+                    pwconf:this.pwconf.value
+                }
+                this.props.dispatch(register(payload))
+            }}>
+                <table className="index_table">
+                <tbody>
+                    <tr>
+                        <td>Account Name</td>
+                        <td><input id="username" type="text" ref={(node) => this.username = node } placeholder="Account name"/></td>
+                    </tr>
+                    <tr>
+                        <td>Email Address</td>
+                        <td><input id="email" type="email" ref={(node) => this.email = node } placeholder="Email"/></td>
+                    </tr>
+                    <tr>
+                        <td>Phone Number</td>
+                        <td><input id="phone" type="tel" ref={(node) => this.phone = node } placeholder="713-213-9708"/></td>
+                    </tr>
+                    <tr>
+                        <td>Date of Birth</td>
+                        <td><input id="birth" type="date" ref={(node) => this.birth = node } placeholder="mm/dd/yyyy"/></td>
+                    </tr>                                                            
+                    <tr>
+                        <td>Zipcode</td>
+                        <td><input id="zipcode" type="zipcode" ref={(node) => this.zipcode = node } placeholder="77005"/></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input id="password" type="password" ref={(node) => this.password = node } placeholder="Password"/></td>
+                    </tr>
+                    <tr>
+                        <td>Password Confirmation</td>
+                        <td><input id="pwconf" type="password" ref={(node) => this.pwconf = node } placeholder="Password confirmation"/></td>
+                    </tr> 
+                </tbody>                   
+                </table>
+                <div>&nbsp;</div>
+                <div className="btnsignin">
+                    <button className="button" id="submitButton" type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    )}
+}
+
+export default connect()(Register)
+

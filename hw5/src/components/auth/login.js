@@ -1,36 +1,32 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {loginAction} from './authActions'
 
+import { localLogin } from './authActions'
 
 const Login = ({dispatch}) => {
-    let username, password;
-
-    // login form
+    let username, password
     return (
-        <div className="col-sm-6 well">
-            <div className = "text-center">
-                <h2>Log in</h2>
+        <div className="login_title">
+            <table className="index_table">
+            <tbody>
+                <tr>
+                    <td>Account Name</td>
+                    <td><input id="loginUsername" type="text" placeholder="Account Name"
+                        ref={(node) => { username = node }} /></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input id="loginPassword" type="password" placeholder="Password"
+                        ref={(node) => { password = node }} /></td>
+                </tr> 
+            </tbody>  
+            </table>
+            <div>&nbsp;</div>
+            <div className="btnsignin">
+                <input className="button" type="button" value="Log In"
+                onClick={() => { dispatch(localLogin(username.value, password.value)) }}/>
             </div>
-            <div>
-                <div className="form-group row">
-                    <label className="col-xs-4 col-form-label">Account Name</label>
-                    <div className="col-xs-8">
-                        <input className="form-control" type="text" name="account name" placeholder="Account" ref={(node) => { username = node }}/>
-                    </div>
-                </div>
-                <div className="form-group row">
-                    <label className="col-xs-4 col-form-label">Password</label>
-                    <div className="col-xs-8">
-                        <input className="form-control" type="password" name="password" placeholder="Password" ref={(node) => { password = node }}/>    
-                    </div>
-                </div>
-                <div className="row formRow alert fade in" id="log-notice"></div>
-                    <div className = "col-sm-4 col-md-offset-5">
-                        <button type="button" className="btn btn-primary" onClick={() => {dispatch(loginAction(username.value, password.value))}}>Login</button>
-                    </div>
-            </div>
-        </div>
+        </div>            
     )
 }
 

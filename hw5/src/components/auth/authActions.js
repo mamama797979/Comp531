@@ -1,48 +1,64 @@
-import Promise from 'bluebird'
-import Action, {nav2Main, nav2Index, displayErrorMsg, resource} from '../../actions'
-import { getProfile, getProfileHeadline} from '../profile/profileActions'
-import { getFollowers } from '../main/followingActions'
-import { getArticles } from '../article/articleActions'
+import Action, { resource, updateError, updateSuccess, navToMain, navToOut, apiUrl } from '../../actions'
 
-export function initialStates(username){
+import { fetchFollowers } from '../main/followingActions'
+import { fetchArticles } from '../article/articleActions'
+import { fetchProfile, validateProfile } from '../profile/profileActions'
+
+export function initialVisit() {
     return (dispatch) => {
-        
-        //Get all the informaiton for main page and profile page
-        let t1 = dispatch(getProfile())
-        let t2 = dispatch(getProfileHeadline(username))
-        let t3 = dispatch(getFollowers())
-        let t4 = dispatch(getArticles())
-
-        //Navigate to the main page
-        Promise.all([t1,t2,t3,t4]).then(()=>{
-            dispatch(nav2Main())
+        resource('GET', 'headlines').then((response) => {
+            dispatch(navToMain())
+            dispatch({type: Action.UPDATE_HEADLINE,
+                username: response.headlines[0].username,
+                headline: response.headlines[0].headline
+            })
+            dispatch(fetchProfile())
+            dispatch(fetchFollowers())
+            dispatch(fetchArticles())
+        }).catch((err) => {
         })
     }
 }
 
-export function loginAction(username, password) {
-     console.log("Login triggered!")
+export function localLogin(username, password) {
     return (dispatch) => {
-        console.log("Login triggered!")
-        resource('POST', 'login', {username, password })
+        resource('POST', 'login', { username, password })
         .then((response) => {
-            console.log("response:"+response);
-            dispatch({type: Action.LOGIN, username: response.username})
-            dispatch(initialStates(username))
+            dispatch({type: Action.LOGIN_LOCAL, username: response.username})
+            dispatch(initialVisit())
         }).catch((err) => {
-            dispatch(displayErrorMsg(`Invalid logging in as user: ${username}`))
+            dispatch(updateError(`There was an error logging in as ${username}`))
         })
     }
 }
 
-export function logoutAction(){
+export function logout() {
     return (dispatch) => {
-        resource('PUT','logout')
+        resource('PUT', 'logout')
+        .then(dispatch({type:'NAV_OUT'}))
+        .catch((err) => {
+            dispatch({type: Action.LOGIN_LOCAL, username: undefined})
+            dispatch(navToOut())
+        })
+    }
+}
+
+export function register({username, email, phone, birth, zipcode, password, pwconf}) {
+    return (dispatch) => {
+        if (!username || !email || !phone || !birth || !zipcode || !password || !pwconf) {
+            return dispatch(updateError('All fields must be supplied'))
+        }
+
+        const err = validateProfile({username, email, phone, birth, zipcode, password, pwconf})
+        if (err.length > 0) {
+            return dispatch(updateError(err))
+        }
+
+        resource('POST', 'register', {username, email, phone, birth, zipcode, password})
         .then((response) => {
-            dispatch({type:Action.LOGOUT})
-            dispatch(nav2Index())
+            return dispatch(updateSuccess(`Success!  You can now log in as "${response.username}".`))
         }).catch((err) => {
-            console.log("Logout Fails: " + err);
+            return dispatch(updateError("There was an error registering, perhaps your username is already taken?"))
         })
     }
 }
