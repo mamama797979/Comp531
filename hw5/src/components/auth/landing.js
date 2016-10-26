@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Login from './login'
 import Register from './register'
 
+//The landing page JSX
 let ErrorMessage = ({error, success}) => (
     <div className="row">
         { error.length == 0 ? '' :
