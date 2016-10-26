@@ -4,8 +4,6 @@ import { getProfile, getProfileHeadline} from '../profile/profileActions'
 import { getFollowers } from '../main/followingActions'
 import { getArticles } from '../article/articleActions'
 
-
-
 export function initialStates(username){
     return (dispatch) => {
         
@@ -21,7 +19,6 @@ export function initialStates(username){
         })
     }
 }
-
 
 export function loginAction(username, password) {
      console.log("Login triggered!")
