@@ -13,8 +13,8 @@ var articleSet = [
 			},
 			{
 				id: 3,
-				author: "Leo",
-				text: "This is Leo's article"
+				author: "Tom",
+				text: "This is Tom's article"
 			}
 ]
 
@@ -42,17 +42,10 @@ const getArticles = (req, res) => {
 		res.send(articleSet)
 	}
 }
-/*
-const getArticlesById = (req, res) => {
-	res.send(articleSet.filter((article) => {
-		return article.id == req.params.id
-	}))
-}
-*/
+
 const app = express()
 app.use(bodyParser.json())
 app.get('/articles/:id*?', getArticles)
-//app.get('/articles', getArticles)
 app.post('/article', addArticle)
 
 // Get the port from the environment, i.e., Heroku sets it
