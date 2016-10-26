@@ -6,6 +6,7 @@ import Comment from './comment'
 import ContentEditable from './contentEditable'
 import { editArticle } from './articleActions'
 
+//React component for a single article.
 class Article extends Component {
 
   constructor(props) {
