@@ -1,4 +1,4 @@
 {
 	netid: xm10
-	url: http://fortunate-scarecrow.surge.sh/
+	url: http://http://sophisticated-cars.surge.sh/
 }
