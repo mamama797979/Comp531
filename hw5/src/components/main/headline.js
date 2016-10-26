@@ -1,37 +1,40 @@
-import React, {PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { putProfileHeadline} from '../profile/profileActions'
+import { updateHeadline } from '../profile/profileActions'
 
-//Headline component
-const Headline = ({avatar, headline, dispatch}) => {
-    let newHeadline;
-    return(<div className="well">
-        <div className="row">
-            <img src={avatar} style={{height:'100px'}}/>
-        </div>
-        <div className="row">
-            <br/>
-            <p><label>My status:</label></p>
-            <p>{headline}</p>
-            <input type="text" className="form-control input-sm" style={{maxlength:"64px"}} placeholder="Update Status" ref={(node) => {newHeadline=node}}/>
-            <br/>
-            <button type="button" className="btn btn-primary" onClick={()=>
-                {if(newHeadline.value.length!==0) {
-                    dispatch(putProfileHeadline(newHeadline.value));
-                    newHeadline.value = ''
+class Headline extends Component {
+
+    render() { return (
+        <div className="user_card">
+            <img width="100%" src={ this.props.avatar }/>
+            <p id="username">{ this.props.username }</p>
+            <p id="headline">{ this.props.headline }</p>
+            <div>
+                <div>
+                    <p><input className="headfield" id="headline" type="text"
+                        placeholder="update your headline"
+                        ref={ (node) => { this.newHeadline = node }}
+                        onChange={() => this.forceUpdate()} /></p>
+                </div>
+                { !(this.newHeadline && this.newHeadline.value.length > 0) ? '' :
+                    <div>
+                        <p><input className="udtbtn" type="button" value="Update your Headline"
+                            onClick={() => {
+                                this.props.dispatch(updateHeadline(this.newHeadline.value))
+                                this.newHeadline.value = ''
+                            }}/></p>
+                    </div>
                 }
-            }}>Update</button>
+            </div>
         </div>
-    </div>)}
-
-Headline.PropTypes = {
-    avatar: PropTypes.string.isRequired,
-    headline: PropTypes.string.isRequired
+    )}
 }
-
-export default connect((state) => {
-    return {
-        avatar: state.profile.avatar,
-        headline: state.profile.headline
+export default connect(
+    (state) => {
+        return {
+            username: state.profile.username,
+            headline: state.profile.headline,
+            avatar: state.profile.avatar
+        }
     }
-})(Headline)
+)(Headline)

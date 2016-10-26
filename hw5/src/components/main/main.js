@@ -1,25 +1,31 @@
 import React from 'react'
-import {connect} from 'react-redux'
 
-import Nav from './nav'
 import Headline from './headline'
 import Following from './following'
-import ArticleView from '../article/articleView'
+import ArticlesView from '../article/articlesView'
+import { navToMain, navToProfile } from '../../actions'
+import { logout } from '../auth/authActions'
 
-// Main page structure
 const Main = () => (
+    // This is the main view.
+    // On this view we display the user's avatar, their headline,
+    // their feed of articles (with a search fiilter),
+    // and their list of followers.
     <div>
-        <Nav/>
-        <div className="container">
-            <div className="col-md-3 text-center">
-                <Headline/>
-                <Following/>
-            </div>
-            <div className="col-md-8 col-md-offset-1">
-                <ArticleView/>
-            </div>
+        <div>
+            <h1>RiceNet</h1>
+        </div>
+        <div>&nbsp;</div>
+        <div className="left">
+            <Headline/>
+            <Following/>
+        </div>
+        <div className="right">
+            <ArticlesView/>
         </div>
     </div>
+    
 )
 
-export default connect()(Main)
+export default Main
+
