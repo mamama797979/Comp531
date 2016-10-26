@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import ProfileForm from './profileForm'
 import Avatar from './avatar'
 
+//The profile page JSX
 const Messages_ = ({error, success}) => (
      <div>
         <div>
