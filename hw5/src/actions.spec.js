@@ -1,105 +1,100 @@
 import { expect } from 'chai'
 import mockery from 'mockery'
 import fetch, {mock} from 'mock-fetch'
-require('isomorphic-fetch')
 
-import Action, {url, displayErrorMsg, displaySuccessMsg, nav2Main, nav2Profile, nav2Index, resource} from './actions'
+import Action, {apiUrl, updateError, updateSuccess, 
+	navToProfile, navToMain, navToOut, resource} from './actions'
+
+
 
 
 describe('Validate actions (these are functions that dispatch actions)', () => {
-
 	let Action, actions
 	beforeEach(() => {
 		if(mockery.enable) {
 			mockery.enable({warnOnUnregistered: false, useCleanCache:true})
 			mockery.registerMock('node-fetch', fetch)
 			require('node-fetch')
-  		}
-  		Action = require('./actions').default
-  		actions = require('./actions') 
+		}
+		Action = require('./actions').default
+		actions = require('./actions') 
 	})
 
 	afterEach(() => {
-  		if (mockery.enable) {
+		if (mockery.enable) {
 			mockery.deregisterMock('node-fetch')
 			mockery.disable()
-  		}
+		}
 	})
 
-
-	it('- resource should be a resource (i.e., mock a request)', (done)=> {
-		mock(`${url}/login`, {
+	it('resource should be a resource (i.e., mock a request)', (done)=> {
+		mock(`${apiUrl}/login`, {
 			method: 'GET',
 			headers: {'Content-Type': 'application/json'},
 		})
 
 		resource('GET', 'sample').then((response) => {
-			expect(response.articles).to.exist;
+			expect(response.articles).to.exist
+			done()
 		})
-		.then(done)
-		.catch(done)
 	})
 
-
-	it('- resource should give me the http error', (done)=> {
-		const username = 'xm10test'
-		const password = 'wrong password'
+	it('resource should give me the http error', (done)=> {
+		const username = 'xm10'
+		const password = 'Unauthorized'
 		
-		mock(`${url}/login`, {
+		mock(`${apiUrl}/login`, {
 			method: 'POST',
 			headers: {'Content-Type': 'application/json'},
 			json: {username, password}
 		})
 
-		resource('POST', 'login', {username, password }).catch((err) => {
-			expect(err.toString()).to.eql('Error: Unauthorized')
+		resource('POST', 'login', {username, password}).catch((err) => {
+			expect(err.toString()).to.eql('Error: Error in POST login {}')
+			done()
 		})
-		.then(done)
-		.catch(done)
 	})
 
 
-	it('- resource should be POSTable', (done)=> {
-		const username = 'xm10test'
-		const password = 'branch-report-their'
+	it('resource should be POSTable', (done)=> {
+		const username = 'xm10'
+		const password = 'small-climbed-joined'
 		
-		mock(`${url}/login`, {
+		mock(`${apiUrl}/login`, {
 			method: 'POST',
 			headers: {'Content-Type': 'application/json'},
 			json: {username, password}
 		})
 
 		resource('POST', 'login', {username, password }).then((response) => {
-			expect(response).to.eql({username: "xm10test", result: "success"})
+			expect(response).to.eql({username: "xm10", result: "success"})
+			done()
 		})
-		.then(done)
-		.catch(done)
 	})
 
 
 	it('should update error message (for displaying error mesage to user)', ()=>{
-		const msg = 'test error message';
 		const expectAction = {
-			type: Action.ERRORMSG,
-			errorMsg: msg
+			type: Action.ERROR,
+			error: 'error message'
 		}
-		expect(displayErrorMsg(msg)).to.eql(expectAction);
+		expect(updateError('error message')).to.eql(expectAction);
 	})
 
 
 	it('should update success message (for displaying success message to user)', ()=>{
-		const msg = 'test success message';
 		const expectAction = {
-			type: Action.SUCCESSMSG,
-			successMsg: msg
+			type: Action.SUCCESS,
+			success: 'success message'
 		}
-		expect(displaySuccessMsg(msg)).to.eql(expectAction);
+		expect(updateSuccess('success message')).to.eql(expectAction);
 	})
 
 
-	it('should navigate (to profile, main, or landing)', ()=>{
-		expect(nav2Index()).to.eql({type: Action.NAV2INDEX});
-		expect(nav2Main()).to.eql({type: Action.NAV2MAIN});
-		expect(nav2Profile()).to.eql({type: Action.NAV2PROFILE});
+	it('should navigate to profile, main, and landing', ()=>{
+		expect(navToOut()).to.eql({type: Action.NAV_OUT});
+		expect(navToMain()).to.eql({type: Action.NAV_MAIN});
+		expect(navToProfile()).to.eql({type: Action.NAV_PROFILE});
 	})
+
 })

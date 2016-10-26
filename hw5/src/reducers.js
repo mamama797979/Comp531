@@ -1,77 +1,80 @@
 import { combineReducers } from 'redux'
 import Action from './actions'
 
-//reducers for changing the state in the store
-export function shared(state = {location:'', errorMsg:'', successMsg:''},action){
-    let cleanMsg = {errorMsg:'', successMsg:''}
-    switch(action.type){
-        case Action.ERRORMSG:
-            return { ...state, ...cleanMsg, errorMsg: action.errorMsg}
-        case Action.SUCCESSMSG:
-            return { ...state, ...cleanMsg, successMsg: action.successMsg}
-        case Action.NAV2MAIN:
-            return { ...state, ...cleanMsg, location: 'MAIN_PAGE'}
-        case Action.NAV2PROFILE:
-            return { ...state, ...cleanMsg, location: 'PROFILE_PAGE'}
-        case Action.NAV2INDEX:
-            return { ...state, ...cleanMsg, location: ''}
+function followers(state = { followers: {} }, action) {
+    switch(action.type) {
+        case Action.FOLLOWER_UPDATE:
+            return { ...state, followers: action.followers }
+
         default:
-            return {...state,...cleanMsg}
+            return state
     }
 }
 
+function articles(state = { articles: {}, searchKeyword: '', avatars: {} }, action) {
+    switch(action.type) {
+        case Action.EDIT_ARTICLE:
+        case Action.ADD_ARTICLE:
+            const articles = { ...state.articles }
+            articles[action.article.id] = action.article
+            return { ...state, articles }
 
-export function profile(state = { username:'', headline:'', avatar:'', zipcode:'', email:'',dob:''}, action){
-    switch(action.type){
-        case Action.LOGOUT:
-            return {...state, username:''}
-        case Action.LOGIN:
-            return {...state, username:action.username}
-        case Action.UPDATE_PROFILE:
-            if(action.avatar) {
-                return {...state, avatar: action.avatar}
-            }
-            if(action.email) {
-                return {...state, email: action.email}
-            }
-            if(action.zipcode){
-                return {...state, zipcode: action.zipcode}
-            }
-            if(action.dob){
-                return {...state, dob: action.dob}
-            }
-            if(action.headline){
-                return {...state, headline: action.headline}
-            }
-        default:
-            return state;
-    }
-}
-
-
-export function followers(state = {followers:{}}, action){
-    switch(action.type){
-        case Action.UPDATE_FOLLOWERS:
-            return {...state, followers: action.followers};
-        default:
-            return state;
-    }
-}
-
-
-export function articles(state = {articles:{},keyword:''}, action){
-    switch(action.type){
         case Action.UPDATE_ARTICLES:
-            return {...state, articles: action.articles}
+            return { ...state, articles: action.articles }
+
         case Action.SEARCH_KEYWORD:
-            return {...state, keyword: action.keyword}
+            return { ...state, searchKeyword: action.keyword }
+
+        case Action.UPDATE_AVATARS:
+            return { ...state, avatars: action.avatars }
+
         default:
-            return state;
+            return state
+    }
+}
+
+function profile(state = { username:'', headline: '', avatar: '', zipcode: '', email: ''}, action) {
+    switch (action.type) {
+
+        case Action.UPDATE_HEADLINE:
+        case Action.LOGIN_LOCAL:
+            return { ...state, username: action.username, headline: action.headline }
+
+        case Action.UPDATE_PROFILE:
+            if (action.headline) return { ...state, headline: action.headline }
+            if (action.avatar) return { ...state, avatar: action.avatar }
+            if (action.zipcode) return { ...state, zipcode: parseInt(action.zipcode) }
+            if (action.email) return { ...state, email: action.email }
+
+        default:
+            return state
+    }
+}
+
+function common(state = { error:'', success:'', location:'' }, action) {
+    const clean = { error: '', success: '' }
+    switch (action.type) {
+        case Action.SUCCESS:
+            return { ...state, ...clean, success: action.success }
+        case Action.ERROR:
+            return { ...state, ...clean, error: action.error }
+
+        case Action.NAV_PROFILE:
+            return { ...state, ...clean, location: 'profile'}
+        case Action.NAV_MAIN:
+            return { ...state, ...clean, location: 'main' }
+        case Action.NAV_OUT:
+            return { ...state, ...clean, location: '' }
+
+        default:
+            return { ...state, ...clean }
     }
 }
 
 const Reducer = combineReducers({
-    articles, followers, profile, shared
+    articles, profile, followers, common
 })
 
 export default Reducer
+
+
