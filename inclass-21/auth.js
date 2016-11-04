@@ -30,12 +30,12 @@ function login(req, res){
 	var username = req.body.username;
 	var password = req.body.password;
 	if(!username || !password){
-		res.sendStatus(400).send("missing password or username")
+		res.sendStatus(400).send("Missing password or username")
 		return
 	}
 	var userObj = User.filter(r => {return r.username === ''+username})[0];
 	if(!userObj){
-		res.sendStatus(401).send("Don't have this user")
+		res.sendStatus(401).send("This user is not registered")
 		return
 	}
 	var sid = Math.floor(Math.random()*5000)
@@ -45,7 +45,7 @@ function login(req, res){
 		res.send(msg)
 	}
 	else {
-		res.sendStatus(401).send("incorrect password")
+		res.sendStatus(401).send("Wrong password")
 	}
 }
 
