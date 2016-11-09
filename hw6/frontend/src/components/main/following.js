@@ -3,18 +3,24 @@ import { connect } from 'react-redux'
 
 import { addFollower, delFollower, dispatch } from './followingActions'
 
-//React component for follower side bar
 const Follower = ({name, avatar, headline, dispatch}) => (
     <div className="follower_card" name="follower">
         <img src={ avatar }/>
         <p>{ name }</p>
         <p><em>{ headline }</em></p>
         <p>
-            <input className="udtbtn" type="button" value="Unfollow" onClick={() => { dispatch(delFollower(name)) }} />
+            <input className="unfollow" type="button" value="Unfollow" onClick={() => { dispatch(delFollower(name)) }} />
         </p>
         <div>&nbsp;</div>
     </div>
 )
+
+Follower.propTypes = {
+    name: PropTypes.string.isRequired,
+    avatar: PropTypes.string,
+    headline: PropTypes.string,
+    dispatch: PropTypes.func.isRequired
+}
 
 class Following extends Component {
     render() { return (
@@ -26,12 +32,12 @@ class Following extends Component {
                     dispatch={this.props.dispatch} />           
             )}
             <div>
-                <p><input type="text" placeholder="add a follower"
+                <p><input id="add_follower" type="text" placeholder="add a follower"
                         ref={(node) => this.newFollower = node }
                         onChange={(e) => { this.forceUpdate() }}/></p>
                 <div>&nbsp;</div>
                 { !(this.newFollower && this.newFollower.value && this.newFollower.value.length > 0) ? '' :
-                    <p><input type="button"
+                    <p><input type="button" id="addFollowerBtn" 
                         onClick={() => {
                             this.props.dispatch(addFollower(this.newFollower.value))
                             this.newFollower.value = ''
@@ -47,13 +53,6 @@ class Following extends Component {
             </div>
         </div>
     )}
-}
-
-Follower.propTypes = {
-    name: PropTypes.string.isRequired,
-    avatar: PropTypes.string,
-    headline: PropTypes.string,
-    dispatch: PropTypes.func.isRequired
 }
 
 Following.propTypes = {
