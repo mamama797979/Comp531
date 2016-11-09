@@ -8,14 +8,15 @@ class ProfileForm extends Component {
     componentDidUpdate() {
         if (this.props.error.length == 0) {
             this.email.value = null
-            this.phone.value = null
             this.zipcode.value = null
             this.password.value = null
             this.pwconf.value = null
+            this.dob.value = null
         }
     }
 
-    render() { return (
+
+    render() { return (        
         <form onSubmit={(e) => {
             if (e) e.preventDefault()
             const payload = {
@@ -26,13 +27,15 @@ class ProfileForm extends Component {
             }
             this.props.dispatch(updateProfile(payload))
         }}>
-            
-            <table className="index_table1">
-            <tbody>
+            <table className="index_table">
                 <tr>
                     <td>Email Address</td>
                     <td><input id="email" type="text" placeholder={this.props.oldEmail}
                         ref={(node) => this.email = node }/></td>
+                </tr>
+                <tr>
+                    <td>Date of Birth</td>
+                    <td>{this.props.oldDob}</td>
                 </tr>
                 <tr>
                     <td>Zipcode</td>
@@ -41,19 +44,18 @@ class ProfileForm extends Component {
                 </tr>
                 <tr>
                     <td>Password</td>
-                    <td><input id="password" type="password" placeholder="Password"
+                    <td><input id="password" type="password" placeholder="password"
                         ref={(node) => this.password = node }/></td>
                 </tr>
                 <tr>
                     <td>Password Confirmation</td>
-                    <td><input id="pwconf" type="password" placeholder="Password Confirmation"
+                    <td><input id="pwconf" type="password"placeholder="password"
                         ref={(node) => this.pwconf = node }/></td>
                 </tr>
-            </tbody>
             </table>
             <br />
             <div className="btnprofile">
-                <button className="button" type="submit">Update</button> 
+                <button className="button" id="updateBtn" type="submit">Update</button> 
             </div>
 
         </form>
@@ -73,6 +75,7 @@ export default connect(
             error: state.common.error,
             oldZipcode: state.profile.zipcode,
             oldEmail: state.profile.email,
+            oldDob: state.profile.dob
         }
     }
 )(ProfileForm)
