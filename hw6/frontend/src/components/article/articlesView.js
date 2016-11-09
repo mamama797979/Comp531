@@ -5,16 +5,14 @@ import Article from './article'
 import NewArticle from './newArticle'
 import { searchKeyword } from './articleActions'
 
-//Overall article views, include the new article part, the search bar and all articles
 const ArticlesView = ({username, articles, dispatch}) => {  
   let keyword = ''
   return (
       <table className="card_table">
-      <tbody>
         <NewArticle/>
         <tr>
           <td>
-            <p><input type="text" className="searchfield" placeholder="Search Posts"
+            <p><input type="text" id="search" className="searchfield" placeholder="Search Posts"
               ref={(node) => keyword = node }
               onChange={() => { dispatch(searchKeyword(keyword.value)) }}/></p>
           </td>
@@ -30,12 +28,12 @@ const ArticlesView = ({username, articles, dispatch}) => {
             date={article.date} text={article.text} img={article.img} avatar={article.avatar}
             comments={article.comments}/>
         )}
-      </tbody>
       </table>
   )
 }
 
 ArticlesView.propTypes = {
+  username: PropTypes.string.isRequired,
   articles: PropTypes.arrayOf(PropTypes.shape({
     ...Article.propTypes
   }).isRequired).isRequired
