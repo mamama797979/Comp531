@@ -6,7 +6,6 @@ import Comment from './comment'
 import ContentEditable from './contentEditable'
 import { editArticle } from './articleActions'
 
-//React component for a single article.
 class Article extends Component {
 
   constructor(props) {
@@ -17,7 +16,6 @@ class Article extends Component {
     this.newComment = ''
   }
 
-  //article display structure
   render() {
     const date = moment(new Date(this.props.date))
     return (
@@ -27,11 +25,11 @@ class Article extends Component {
             <div>
               <p>
                 <img className="followingImage" src={ this.props.avatar }/>
-                <span>{this.props.author} posted
+                <span>{this.props.author} said
                 on {date.format('MM-DD-YYYY')} at {date.format('HH:mm:ss')}</span>
               </p>
-              <div>
-                <ContentEditable className="media-body" html={this.props.text}
+              <p>
+                <ContentEditable className="media-body" id="media-body" html={this.props.text}
                   contentEditable={this.props.username == this.props.author}
                   tooltip={this.props.username == this.props.author ? 'click to edit' : ''}
                   onChange={(e) => {
@@ -39,9 +37,9 @@ class Article extends Component {
                     this.disabled = this.props.text == this.newMessage
                     this.forceUpdate()
                   }}/>
-              </div>
+              </p>
               <p>
-                <img src={this.props.img} width="60%"  />
+                <img src={this.props.img} width="60%" />
               </p>
               <div>
                   <p>
@@ -52,13 +50,14 @@ class Article extends Component {
                       }}>
                       { this.hideComments ? 'Show' : 'Hide' } Comments ({ this.props.comments.length })
                     </label>
+                    &nbsp;&nbsp;&nbsp;
                     <label className="cardbutton"
                       onClick={() => { this.addComment = !this.addComment; this.forceUpdate() }}>
                       { this.addComment ? 'Cancel' : 'Add a comment' }
                     </label>
                     &nbsp;&nbsp;&nbsp;
                     { this.props.author != this.props.username ? '' :               
-                      <label className="cardbutton"
+                      <label className="postEditbutton"
                         title="Click the text to edit your post"
                         disabled={this.disabled}
                         onClick={() => {
