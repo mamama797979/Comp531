@@ -3,8 +3,8 @@ import { findId, sleep } from './selenium'
 
 // TODO add your test user credentials here!
 exports.creds = {
-    username: "cz32test",
-    password: "edge-someone-please"
+    username: "xm10test",
+    password: "branch-report-their"
 }
 
 exports.login = () => 
