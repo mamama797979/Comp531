@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import ProfileForm from './profileForm'
 import Avatar from './avatar'
 
-//The profile page JSX
 const Messages_ = ({error, success}) => (
      <div>
         <div>
@@ -41,7 +40,7 @@ const Profile = () => {
         <div>
             <div>&nbsp;</div>
             <div>&nbsp;</div>
-            <h1><b>Profile Page</b></h1>
+            <h1><b>Customer Profile Page</b></h1>
             <Avatar/>
             <Messages/>
             <ProfileForm/>
