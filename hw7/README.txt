@@ -1,5 +1,5 @@
 { 
     "netid": "xm10",
   	"frontend": "https://useless-bike.surge.sh/",
-  	"backend": ""
+  	"backend": "https://ricenet7.herokuapp.com/"
 }
