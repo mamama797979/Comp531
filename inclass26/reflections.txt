@@ -1,1 +1,17 @@
+1.What did you hope to learn but did not?
+--I hoped to learn Hapi.js in class, but we instead talk about Express.
 
+2.What did you really enjoy learning about?
+--I really enjoy learning about the React and Redux part of the class, it teach me a frame work to build web app.
+
+3.What worked well in the course? and how?
+--Step by step learning is the most important thing in this class. We finish inclass exercise under the help of Scott first then finishing homework is much easier.
+
+4.What did not work well in the course and how might it be improved?
+--The End to end test part doesn't work well in this part, I think. Maybe because my computer broke at that period.
+
+5.What could I have done to help you more, presentation of material, design of in class exercises, goals of projects – and be specific please!
+Some of the inclass exercises were difficult and required a lot of time. It would have been better if a little more help were offered through slides.
+
+6.Anything else you like to say?
+Thank you for this course.
