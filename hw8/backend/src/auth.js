@@ -312,8 +312,6 @@ const successFun = (req,res) => {
 }
 
 const errorFun = (err,req,res,next) => {
-	// You could put your own behavior in here, fx: you could force auth again...
-    // res.redirect('/auth/facebook/');
     if(err) {
         res.status(400);
         res.send({err: err.message});
@@ -329,21 +327,16 @@ const locationFun = (req, res, next) => {
 
 module.exports = app => {
 	app.use(cookieParser());
-
 	app.use(locationFun)
 	app.use(session({secret:'thisIsMySecretMessage', resave: false, saveUninitialized: false}))
 	app.use(passport.initialize())
 	app.use(passport.session())
 	app.use('/login/facebook', passport.authenticate('facebook', {scope:'email'}))
 	app.use('/auth/facebook/callback', passport.authenticate('facebook', {failureRedirect:'/login/facebook'}), successFun, errorFun)
-
     	app.post('/login', login);
     	app.post('/register', register);
-
 	app.use(isLoggedIn)
-
 	app.use('/link/facebook', passport.authorize('facebook', {scope:'email'}))
-
 	app.post('/unlink', unlink)
 	app.post('/merge', merge)
 	app.put('/password', newPassword);
