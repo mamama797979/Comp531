@@ -13,7 +13,7 @@ const session = require('express-session')
 const passport = require('passport')
 const FacebookStrategy = require('passport-facebook').Strategy;
 const secret = 'I like to be a web developer!'
-const redis = require('redis').createClient('redis://h:p5q9eb8pukmt4khb1lv23joh52@ec2-54-204-17-168.compute-1.amazonaws.com:10829')
+const redis = require('redis').createClient('redis://h:p196a6ce7fa6f12b52aa7da8e709d06929a3ec751b15f05e12636abf1ea4c0c45@ec2-54-221-211-164.compute-1.amazonaws.com:24969')
 
 let originHostUrl = '';
 
