@@ -1,7 +1,6 @@
 'use strict';
 
-// this is profile.js which contains all user profile 
-// information except passwords which is in auth.js
+// this is profile.js 
 const parseFD = require('./uploadCloudinary')
 const Profile = require('./model.js').Profile
 
