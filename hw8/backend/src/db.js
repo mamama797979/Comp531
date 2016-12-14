@@ -42,5 +42,3 @@ function shutdown(msg, callback) {
 		callback()
 	})
 }
-///////////////////////////////////////////////////
-
