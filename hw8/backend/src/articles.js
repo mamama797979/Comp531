@@ -28,8 +28,6 @@ const getArticle = (req, res) => {
         }
     })}
     else{
-        // Article.find({}).exec(function(err, articles){
-        // res.status(200).send({articles: articles})
         const username = req.username;
         Profile.find({username: username}).exec(function(err, profile){
             const profileObj = profile[0]
@@ -79,7 +77,6 @@ const updateArticle = (req, res) => {
                     })  
                 } else{
                     if (articles[0].author !== req.username) {
-                        //forbidden if this user dosen't own this article
                         res.status(401).send("you don't own this article")
                         return
                     }
