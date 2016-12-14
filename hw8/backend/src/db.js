@@ -10,7 +10,6 @@ if (process.env.MONGOLAB_URI) {
 
 mongoose.connect(url)
 
-///////////////////////////////////////////////////
 mongoose.connection.on('connected', function() {
 	console.log('Mongoose connected to ' + url)
 })
