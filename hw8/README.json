@@ -1,5 +1,5 @@
 { 
     "netid": "xm10",
-  	"frontend": "http://foolish-boats.surge.sh",
+  	"frontend": "http://nosy-destruction.surge.sh",
   	"backend": "http://ricenet23.herokuapp.com"
 }
